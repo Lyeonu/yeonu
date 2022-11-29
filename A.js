@@ -1,12 +1,35 @@
-const express = require('express');
+import React from "react";
+import ProTypes from 'prop-types';
 
-const app = express();
-
-app.get('*', (request, respone) => {
-    console.log(request.query);
-    respone.send(request.query);
-});
-
-app.listen(52273, () => {
-    console.log('Server runnuing at http://127.0.0.1:522723');
-});
+function Food({name, picture}) {
+    return(
+        <div>
+            <h1>I like {name} </h1>
+            <h4>{rating}/5.0</h4>
+            <img src = {picture} />
+        </div>
+    );
+}
+const foodILike = [
+    {
+        id: 1,
+        name:'kimchi',
+        image:'https://bit.ly/3d14HVx',
+        rating:4.9,
+    },
+    {
+        id:2,
+        name:'Samgyeopsal',
+        image:'http://asq.kr/wttMFjg1IkYC',
+        rating:5,
+    }
+];
+function App(){
+    return(
+        <div>
+            {foodILike.map(dish => (
+                <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating}/>
+            ))}
+        </div>
+    );
+}
